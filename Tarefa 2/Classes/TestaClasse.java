@@ -11,7 +11,8 @@ public class TestaClasse {
         KpopSingers kpopSinger = new KpopSingers("Jin", 28, "BTS", "Preto", 1.78);
         Planetas planeta = new Planetas("Terra", 1.0, 12742, 149.6, false);
         Refrigerante refrigerante = new Refrigerante("Coca-Cola", "Cola", "Coca-Cola Company", 350, false);
-        Salgadinhos salgadinho = new Salgadinhos("Doritos", "Queijo Nacho", 120.0, 20);
+        Salgadinhos salgadinho = new Salgadinhos("Doritos", "Queijo Nacho", 120.0, 10);
+        Salgadinhos salgadinho2 = new Salgadinhos("Ruffles", "Original", 100.0, 7);
         Sanrio sanrio = new Sanrio("Hello Kitty", "Maçã", "Rosa", 10);
         TiposDeCabelo cabelo = new TiposDeCabelo("Ondulado", "Castanho", 30.0, true);
         TrabalhadoresDeEscritorio trabalhador = new TrabalhadoresDeEscritorio("Carlos", "Gerente", 8500.0, 40);
@@ -37,7 +38,7 @@ public class TestaClasse {
                 opcao = scanner.nextInt();
             } else {
                 System.out.println("Entrada inválida. Por favor, insira um número entre 1 e 11.");
-                scanner.next(); 
+                scanner.next();
                 continue;
             }
 
@@ -118,10 +119,8 @@ public class TestaClasse {
                     System.out.println("Nome: " + salgadinho.getNome());
                     System.out.println("Sabor: " + salgadinho.getSabor());
                     System.out.println("Peso: " + salgadinho.getPeso() + " g");
-                    System.out.println("Quantidade: " + salgadinho.getQntde() + " unidades");
                     salgadinho.Comer();
-                    System.out.println("Quantidade após comer: " + salgadinho.getQntde() + " unidades");
-                    salgadinho.EscolherSabor(new String[]{"Queijo", "Bacon", "Cebola"});
+                    salgadinho.compararPeso(salgadinho2);
                     System.out.println();
                     break;
 
@@ -133,7 +132,6 @@ public class TestaClasse {
                     System.out.println("Idade: " + sanrio.getIdade() + " anos");
                     sanrio.Brincar();
                     sanrio.Cozinhar();
-                    sanrio.Pintar();
                     System.out.println();
                     break;
 

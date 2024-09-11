@@ -3,14 +3,14 @@ public class KpopSingers {
     private int idade;
     private String grupo;
     private String corCabelo;
-    private float altura;
+    private double altura;
 
-    KpopSingers(String _nome, int _idade, String _grupo, String _corCabelo, float _altura) {
+    KpopSingers(String _nome, int _idade, String _grupo, String _corCabelo, double d) {
         this.nome = _nome;
         this.idade = _idade;
         this.grupo = _grupo;
         this.corCabelo = _corCabelo;
-        this.altura = _altura;
+        this.altura = d;
     }
 
     public String getNome() {
@@ -45,7 +45,7 @@ public class KpopSingers {
         this.corCabelo = corCabelo;
     }
 
-    public float getAltura() {
+    public double getAltura() {
         return altura;
     }
     String compararGrupo(KpopSingers outro) {
@@ -58,7 +58,7 @@ public class KpopSingers {
         }
         return retorno;
     }
-    public void setAltura(float altura) {
+    public void setAltura(double altura) {
         this.altura = altura;
     }
     void Cantar() {

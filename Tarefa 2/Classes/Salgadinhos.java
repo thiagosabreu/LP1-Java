@@ -2,13 +2,14 @@ public class Salgadinhos
 {
     String nome;
     String sabor;
-    Float peso;
+    double peso;
     int qtnde;
 
-    Salgadinhos(String _nome, String _sabor, Float _peso) {
+    Salgadinhos(String _nome, String _sabor, double _peso, int _qtnde) {
         this.nome = _nome;
         this.sabor = _sabor;
         this.peso = _peso;
+        this.qtnde = _qtnde;
     }
 
     String getNome() {
@@ -23,13 +24,13 @@ public class Salgadinhos
     void setSabor(String _sabor) {
         this.sabor = _sabor;
     }
-    Float getPeso() {
-        return peso;
+    double getPeso() {
+        return this.peso;
     }
     void setPeso(Float _peso) {
         this.peso = _peso;
     }
-    String compararPeso(Salgadinhos outro) {
+    void compararPeso(Salgadinhos outro) {
         String retorno = "";
         if (this.peso > outro.peso) {
             retorno = "O " + this.nome + " tem um peso maior que o " + outro.nome;
@@ -40,10 +41,11 @@ public class Salgadinhos
         else if (this.peso == outro.peso) {
             retorno = "O " + this.nome + " tem o mesmo peso que o " + outro.nome;
         }
-        return retorno;
+        System.out.println(retorno);
     }
     void Comer()
     {
         this.qtnde -= 1;
+        System.out.println("Um " + this.nome + " foi comido, ainda tem " + this.qtnde);
     }
 }

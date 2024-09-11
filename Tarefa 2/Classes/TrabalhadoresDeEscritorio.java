@@ -1,10 +1,10 @@
 public class TrabalhadoresDeEscritorio {
     private String nome;
     private String cargo;
-    private float salario;
+    private double salario;
     private int idade;
 
-    TrabalhadoresDeEscritorio(String _nome, String _cargo, float _salario, int _idade) {
+    TrabalhadoresDeEscritorio(String _nome, String _cargo, double _salario, int _idade) {
         this.nome = _nome;
         this.cargo = _cargo;
         this.salario = _salario;
@@ -27,11 +27,11 @@ public class TrabalhadoresDeEscritorio {
         this.cargo = cargo;
     }
 
-    public float getSalario() {
+    public double getSalario() {
         return salario;
     }
 
-    public void setSalario(float salario) {
+    public void setSalario(double salario) {
         this.salario = salario;
     }
 

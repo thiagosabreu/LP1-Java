@@ -1,14 +1,14 @@
 public class JogadorasDeVolei {
     private String nome;
     private String posicao;
-    private float altura;
+    private double altura;
     private int numeroCamisa;
     private int idade;
 
-    JogadorasDeVolei(String _nome, String _posicao, float _altura, int _numeroCamisa, int _idade) {
+    JogadorasDeVolei(String _nome, String _posicao, double d, int _numeroCamisa, int _idade) {
         this.nome = _nome;
         this.posicao = _posicao;
-        this.altura = _altura;
+        this.altura = d;
         this.numeroCamisa = _numeroCamisa;
         this.idade = _idade;
     }
@@ -29,11 +29,11 @@ public class JogadorasDeVolei {
         this.posicao = posicao;
     }
 
-    public float getAltura() {
+    public double getAltura() {
         return altura;
     }
 
-    public void setAltura(float altura) {
+    public void setAltura(double altura) {
         this.altura = altura;
     }
 

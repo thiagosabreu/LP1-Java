@@ -1,13 +1,13 @@
 public class Cachorro {
     private String nome;
     private String raca;
-    private float peso;
+    private double peso;
     private int idade;
 
-    Cachorro(String _nome, String _raca, float _peso, int _idade) {
+    Cachorro(String _nome, String _raca, double d, int _idade) {
         this.nome = _nome;
         this.raca = _raca;
-        this.peso = _peso;
+        this.peso = d;
         this.idade = _idade;
     }
 
@@ -23,11 +23,11 @@ public class Cachorro {
         return raca;
     }
 
-    public float getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
