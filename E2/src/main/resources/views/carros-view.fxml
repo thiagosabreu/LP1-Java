@@ -2,87 +2,135 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fatec.controllers.CarrosController">
    <children>
-      <ImageView fitHeight="350.0" fitWidth="391.0" layoutX="256.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+      <!-- Imagem -->
+      <ImageView fitHeight="350.0" fitWidth="391.0" layoutX="14.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/carros.jpg" />
-         </image></ImageView>
-      <HBox alignment="CENTER" layoutX="59.0" layoutY="354.0" prefHeight="100.0" prefWidth="785.0">
+         </image>
+      </ImageView>
+
+      <!-- Botão Voltar -->
+      <Button fx:id="btnVoltar" layoutX="30.0" layoutY="55.0" mnemonicParsing="false" onAction="#VoltarOnAction" prefHeight="48.0" prefWidth="88.0" text="Voltar" />
+
+      <!-- Formulário de Cadastro de Carro -->
+      <VBox layoutX="342.0" layoutY="14.0" prefHeight="193.0" prefWidth="551.0">
          <children>
-            <TextField fx:id="txtMarca" promptText="Marca">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </TextField>
-            <TextField fx:id="txtModelo" promptText="Modelo">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </TextField>
-            <TextField fx:id="txtAno" promptText="Ano">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </TextField>
-            <TextField fx:id="txtPeso" promptText="Peso">
-               <opaqueInsets>
-                  <Insets right="20.0" />
-               </opaqueInsets>
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </TextField>
-            <TextField fx:id="txtPortas" promptText="Quantidade Portas">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </TextField>
-            <Button fx:id="btnCriar" mnemonicParsing="false" onAction="#CriarOnAction" prefHeight="48.0" prefWidth="117.0" text="Criar" />
+            <HBox alignment="CENTER" prefHeight="122.0" prefWidth="496.0">
+               <children>
+                  <VBox prefHeight="122.0" prefWidth="193.0">
+                     <children>
+                        <TextField fx:id="txtMarca" promptText="Marca">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtModelo" promptText="Modelo">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtAno" promptText="Ano">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtPeso" promptText="Peso">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="txtPortas" promptText="Quantidade Portas">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <Button fx:id="btnCriar" mnemonicParsing="false" onAction="#CriarOnAction" prefHeight="48.0" prefWidth="117.0" text="Criar">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#EditarOnAction" prefHeight="48.0" prefWidth="117.0" text="Editar">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnExcluir" mnemonicParsing="false" onAction="#ExcluirOnAction" prefHeight="48.0" prefWidth="117.0" text="Excluir">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="LimparCampos" mnemonicParsing="false" onAction="#LimparCampos" prefHeight="48.0" prefWidth="117.0" text="Limpar">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+      
+            <!-- Botões Adicionais -->
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="511.0">
+               <children>
+                  <Button fx:id="btnAcelerar" mnemonicParsing="false" onAction="#AcelerarOnAction" prefHeight="48.0" prefWidth="117.0" text="Acelerar">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnFrear" mnemonicParsing="false" onAction="#FrearOnAction" prefHeight="48.0" prefWidth="117.0" text="Frear">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnPorta" mnemonicParsing="false" onAction="#PortaOnAction" prefHeight="48.0" prefWidth="117.0" text="Abrir Porta">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="59.0" layoutY="481.0" prefHeight="100.0" prefWidth="785.0">
-         <children>
-         <Button fx:id="btnCadastro" mnemonicParsing="false" onAction="#CadastroOnAction" prefHeight="48.0" prefWidth="117.0" text="Ver Cadastro">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnAcelerar" mnemonicParsing="false" onAction="#AcelerarOnAction" prefHeight="48.0" prefWidth="117.0" text="Acelerar">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnFrear" mnemonicParsing="false" onAction="#FrearOnAction" prefHeight="48.0" prefWidth="117.0" text="Frear">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnPorta" mnemonicParsing="false" onAction="#PortaOnAction" prefHeight="48.0" prefWidth="117.0" text="Abrir Porta">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-      <Button fx:id="btnVoltar" layoutX="59.0" layoutY="40.0" mnemonicParsing="false" onAction="#VoltarOnAction" prefHeight="48.0" prefWidth="88.0" text="Voltar" />
+      </VBox>
+
+      <!-- TableView para Visualizar Carros -->
+      <TableView fx:id="viewCarro" layoutX="452.0" layoutY="254.0" onMouseClicked="#clickTableView" prefHeight="321.0" prefWidth="400.0">
+         <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="marcaColumn" text="Marca" />
+            <TableColumn fx:id="modeloColumn" text="Modelo" />
+            <TableColumn fx:id="anoColumn" text="Ano" />
+            <TableColumn fx:id="pesoColumn" text="Peso" />
+            <TableColumn fx:id="portasColumn" text="Portas" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

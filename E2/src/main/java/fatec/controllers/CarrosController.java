@@ -1,15 +1,21 @@
 package fatec.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import fatec.classes.Carro;
+import fatec.data.dao.CarroDAO;
 import fatec.utils.mbox;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class CarrosController {
@@ -44,7 +50,46 @@ public class CarrosController {
     @FXML
     private Button btnVoltar;
 
-    private Carro carro;
+    @FXML
+    private Button btnEditar;
+
+    @FXML
+    private Button btnExcluir;
+
+    @FXML
+    private TableView<Carro> viewCarro;
+
+    private Carro carroSelecionado;
+
+    @FXML
+    private TableColumn<Carro, Integer> idColumn;
+
+    @FXML
+    private TableColumn<Carro, String> marcaColumn;
+
+    @FXML
+    private TableColumn<Carro, String> modeloColumn;
+
+    @FXML
+    private TableColumn<Carro, Integer> anoColumn;
+
+    @FXML
+    private TableColumn<Carro, Double> pesoColumn;
+
+    @FXML
+    private TableColumn<Carro, Integer> portasColumn;
+
+    @FXML
+    public void initialize() {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        marcaColumn.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        modeloColumn.setCellValueFactory(new PropertyValueFactory<>("modelo"));
+        anoColumn.setCellValueFactory(new PropertyValueFactory<>("ano"));
+        pesoColumn.setCellValueFactory(new PropertyValueFactory<>("peso"));
+        portasColumn.setCellValueFactory(new PropertyValueFactory<>("portas"));
+
+        preencherTableView();
+    }
 
     @FXML
     public void CriarOnAction() {
@@ -84,28 +129,22 @@ public class CarrosController {
             return;
         }
 
-        carro = new Carro(marca, modelo, ano, peso, portas);
-
-        mbox.ShowMessageBox("Sucesso", "Carro criado!");
-    }
-
-    @FXML
-    private void CadastroOnAction() {
-        String message = "Marca: " + carro.getMarca() +
-                "\nModelo: " + carro.getModelo() +
-                "\nAno: " + carro.getAno() +
-                "\nPeso: " + carro.getPeso() +
-                "\nQuantidade de Portas: " + carro.getQuantidadePortas();
-
-        mbox.ShowMessageBox("Carro cadastrado", message);
+        carroSelecionado = new Carro(marca, modelo, ano, peso, portas);
+        try {
+            CarroDAO.create(carroSelecionado);
+            mbox.ShowMessageBox("Sucesso", "Carro criado!");
+            preencherTableView();
+            LimparCampos();
+        } catch (SQLException e) {
+            mbox.ShowError("Erro ao criar o carro");
+        }
     }
 
     @FXML
     public void AcelerarOnAction() {
         if (Verificar()) {
-            String title = carro.Acelerar();
+            String title = carroSelecionado.Acelerar();
             String gifPath = getClass().getResource("/gifs/carro-acelerar.gif").toExternalForm();
-
             mbox.ShowGifMessageBox(title, gifPath);
         }
     }
@@ -113,7 +152,7 @@ public class CarrosController {
     @FXML
     public void FrearOnAction() {
         if (Verificar()) {
-            String title = carro.Frear();
+            String title = carroSelecionado.Frear();
             String gifPath = getClass().getResource("/gifs/carro-frear.gif").toExternalForm();
             mbox.ShowGifMessageBox(title, gifPath);
         }
@@ -122,7 +161,7 @@ public class CarrosController {
     @FXML
     public void PortaOnAction() {
         if (Verificar()) {
-            String title = carro.AbrirPorta();
+            String title = carroSelecionado.AbrirPorta();
             String gifPath = getClass().getResource("/gifs/carro-porta.gif").toExternalForm();
             mbox.ShowGifMessageBox(title, gifPath);
         }
@@ -136,11 +175,67 @@ public class CarrosController {
         stage.show();
     }
 
+    @FXML
+    public void EditarOnAction() throws SQLException {
+        if (Verificar()) {
+            String marca = txtMarca.getText();
+            String modelo = txtModelo.getText();
+            int ano = Integer.parseInt(txtAno.getText());
+            double peso = Double.parseDouble(txtPeso.getText());
+            int portas = Integer.parseInt(txtPortas.getText());
+
+            Carro carro = new Carro(carroSelecionado.getId(), marca, modelo, ano, peso, portas);
+            CarroDAO.update(carro);
+            mbox.ShowMessageBox("Sucesso", "Carro editado!");
+            preencherTableView();
+            LimparCampos();
+        }
+    }
+
+    @FXML
+    public void ExcluirOnAction() throws SQLException {
+        if (Verificar()) {
+            CarroDAO.delete(carroSelecionado.getId());
+            mbox.ShowMessageBox("Sucesso", "Carro excluído!");
+            preencherTableView();
+            LimparCampos();
+        }
+    }
+
     private boolean Verificar() {
-        if (carro == null) {
-            mbox.ShowMessageBox("Erro", "Por favor, crie um carro primeiro.");
+        if (carroSelecionado == null) {
+            mbox.ShowMessageBox("Erro", "Por favor, selecione um carro primeiro.");
             return false;
         }
         return true;
+    }
+
+    private void preencherTableView() {
+        try {
+            viewCarro.setItems(FXCollections.observableArrayList(CarroDAO.getAll()));
+        } catch (SQLException e) {
+            System.out.println("Erro ao preencher a TableView com Carros: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void clickTableView() {
+        carroSelecionado = viewCarro.getSelectionModel().getSelectedItem();
+        if (carroSelecionado != null) {
+            txtMarca.setText(carroSelecionado.getMarca());
+            txtModelo.setText(carroSelecionado.getModelo());
+            txtAno.setText(String.valueOf(carroSelecionado.getAno()));
+            txtPeso.setText(String.valueOf(carroSelecionado.getPeso()));
+            txtPortas.setText(String.valueOf(carroSelecionado.getQuantidadePortas()));
+        }
+    }
+
+    @FXML
+    private void LimparCampos() {
+        txtMarca.setText("");
+        txtModelo.setText("");
+        txtAno.setText("");
+        txtPeso.setText("");
+        txtPortas.setText("");
     }
 }
